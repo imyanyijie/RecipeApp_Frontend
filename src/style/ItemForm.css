@@ -1,0 +1,36 @@
+.creat-form {
+    position: absolute;
+    padding: 2rem;
+    margin: 0rem;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px black;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: rgb(167, 176, 184);
+}
+
+.creat-form span {
+    color: red;
+    display: none;
+    text-wrap: wrap;
+}
+
+
+input:invalid {
+    border: 1px solid red;
+}
+
+input:invalid~span {
+    display: block;
+}
+
+.form-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

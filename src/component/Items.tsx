@@ -1,58 +1,53 @@
 import React, { useRef } from "react";
 import { useState, useEffect } from "react";
-import { getAllItem } from "../service/itemService";
+import { abortRequest, getAllItem } from "../service/ItemService";
 import { ItemCard } from "./ItemCard";
 import "../style/Items.css";
-
-export type Item = {
-  id?: number;
-  name: string;
-  description: string;
-  unitCost: number;
-};
-
-//mock data for testing
-const testItems: Item[] = [
-  {
-    id: 1,
-    name: "Apple",
-    description: "apple description",
-    unitCost: 2.0,
-  },
-  {
-    id: 2,
-    name: "Cherry",
-    description: "Cpple description",
-    unitCost: 5.0,
-  },
-  {
-    id: 3,
-    name: "tomato",
-    description: "tomato description",
-    unitCost: 1.4,
-  },
-];
+import { FaPlus } from "react-icons/fa6";
+import { Item } from "../model/Item.ts";
+import { ItemForm } from "./ItemForm.tsx";
 
 const Items: React.FC = () => {
   console.log("render Items");
   const [items, setItems] = useState<Item[]>([]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   useEffect(() => {
     async function getItems() {
       console.log("get items");
       // const items: Item[] = await getAllItem();
-      const items: Item[] = testItems;
+      const items: Item[] = await getAllItem();
       setItems(items);
     }
     getItems();
-  });
-  console.log(testItems.length);
+    return () => {
+      console.log("run clean up");
+      abortRequest();
+    };
+  }, [items]);
+  console.log(items.length);
 
+  const handleCreateClick = () => {
+    setIsOpen(true);
+  };
+  let num = 0;
   return (
-    <div className="item-section">
-      {items.map((item) => (
-        <ItemCard item={item} items={items} setItems={setItems} key={item.id} />
-      ))}
-    </div>
+    <>
+      <div className="item-section">
+        <div className="create-card" onClick={handleCreateClick}>
+          <FaPlus />
+        </div>
+        {items.map((item) => (
+          <ItemCard
+            item={item}
+            items={items}
+            setItems={setItems}
+            setIsOpen={setIsOpen}
+            key={item.id}
+          />
+        ))}
+      </div>
+      {isOpen && <ItemForm setIsOpen={setIsOpen} setItems={setItems} />}
+    </>
   );
 };
 

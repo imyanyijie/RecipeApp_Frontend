@@ -1,15 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Item } from "./Items";
 import "../style/ItemCard.css";
+import { Item } from "../model/Item";
+import * as ItemService from "../service/ItemService";
+import { ItemForm } from "./ItemForm";
 
-interface props {
+interface Props {
   item: Item;
   items: Item[];
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
 }
-const ItemCard: React.FC<props> = ({ item, items, setItems }) => {
-  console.log("render item card");
+const ItemCard: React.FC<Props> = ({ item, items, setItems, setIsOpen }) => {
   return (
     <div className="item-card" key={item.id}>
       <span className="name">Name: {item.name}</span>
@@ -17,10 +19,18 @@ const ItemCard: React.FC<props> = ({ item, items, setItems }) => {
       <span className="unitCost">Cost: {item.unitCost}</span>
       <span className="createTime"></span>
       <div className="button-section">
-        <button className="update" onClick={handleUpdateClick}>
+        <button
+          className="update"
+          onClick={() =>
+            handleUpdateClick({ item, items, setItems, setIsOpen })
+          }
+        >
           Update
         </button>
-        <button className="delete" onClick={handleDeleteClick}>
+        <button
+          className="delete"
+          onClick={() => handleDeleteClick({ item, items, setItems })}
+        >
           Delete
         </button>
       </div>
@@ -28,12 +38,20 @@ const ItemCard: React.FC<props> = ({ item, items, setItems }) => {
   );
 };
 
-const handleUpdateClick = (e) => {
+const handleUpdateClick = (props: Props) => {
   console.log("Update button clicked");
+  const { item, items, setItems, setIsOpen } = props;
+  if (setIsOpen !== undefined) {
+    ItemForm({ item, setIsOpen, setItems });
+    setIsOpen(true);
+  }
 };
 
-const handleDeleteClick = (e) => {
-  console.log("Delete button clicked");
+const handleDeleteClick = async (props: Props) => {
+  const { item, items, setItems } = props;
+  console.log("Delete button clicked" + item.id);
+  const deleteItems: Item[] = await ItemService.deleteItem(item);
+  setItems(deleteItems);
 };
 
 export { ItemCard };

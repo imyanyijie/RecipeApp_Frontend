@@ -12,6 +12,10 @@
     transform: scale(1.02);
 }
 
+.item-card:active {
+    background-color: #b3b3b34f;
+}
+
 .item-card .button-section {
     display: flex;
     flex-direction: row;

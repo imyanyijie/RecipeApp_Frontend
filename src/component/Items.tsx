@@ -11,10 +11,11 @@ const Items: React.FC = () => {
   console.log("render Items");
   const [items, setItems] = useState<Item[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [updateItem, setUpdateItem] = useState<Item>();
+
   useEffect(() => {
     async function getItems() {
       console.log("get items");
-      // const items: Item[] = await getAllItem();
       const items: Item[] = await getAllItem();
       setItems(items);
     }
@@ -24,8 +25,6 @@ const Items: React.FC = () => {
       abortRequest();
     };
   }, [items]);
-  console.log(items.length);
-
   const handleCreateClick = () => {
     setIsOpen(true);
   };
@@ -42,11 +41,14 @@ const Items: React.FC = () => {
             items={items}
             setItems={setItems}
             setIsOpen={setIsOpen}
+            setUpdateItem={setUpdateItem}
             key={item.id}
           />
         ))}
       </div>
-      {isOpen && <ItemForm setIsOpen={setIsOpen} setItems={setItems} />}
+      {isOpen && (
+        <ItemForm item={updateItem} setIsOpen={setIsOpen} setItems={setItems} />
+      )}
     </>
   );
 };

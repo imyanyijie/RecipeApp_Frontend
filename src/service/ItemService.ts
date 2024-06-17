@@ -32,6 +32,7 @@ async function getAllItem():Promise<Item[]>{
         // return response.data;
 
         //use mock data
+        console.log("get all item from api");
         const items: Item[] = testItems;
         return items;
     }

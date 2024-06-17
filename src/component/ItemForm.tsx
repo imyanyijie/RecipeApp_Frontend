@@ -5,7 +5,7 @@ import { createItem } from "../service/ItemService";
 
 interface Prop {
   item?: Item;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
 }
 const ItemForm: React.FC<Prop> = ({ item, setIsOpen, setItems }) => {
@@ -26,12 +26,12 @@ const ItemForm: React.FC<Prop> = ({ item, setIsOpen, setItems }) => {
     setItems(newItems);
 
     //close the form window on sucess
-    setIsOpen(false);
+    if (setIsOpen != undefined) setIsOpen(false);
   };
   const handleCancelClick = (e) => {
     e.preventDefault();
     console.log("cancel click");
-    setIsOpen(false);
+    if (setIsOpen != undefined) setIsOpen(false);
   };
   return (
     <form onSubmit={handleCreateClick} className="creat-form">
@@ -42,13 +42,13 @@ const ItemForm: React.FC<Prop> = ({ item, setIsOpen, setItems }) => {
           type="text"
           name="name"
           pattern="^[A-Za-z0-9]{2,16}$"
-          value={item?.name || ""}
+          defaultValue={item?.name || ""}
         />
         <span>Should be 2-16 character and no special charater!</span>
       </div>
       <div>
         <label htmlFor="description">Description:</label>
-        <input type="text" name="description" value={item?.description || ""} />
+        <input type="text" name="description" defaultValue={item?.description || ""} />
       </div>
       <div>
         <label htmlFor="price">Unit Cost:</label>
@@ -56,7 +56,7 @@ const ItemForm: React.FC<Prop> = ({ item, setIsOpen, setItems }) => {
           type="text"
           name="price"
           pattern="[0-9]*[.,]?[0-9]*"
-          value={item?.unitCost || ""}
+          defaultValue={item?.unitCost || ""}
         />
         <span>Price should only be numbers !</span>
       </div>

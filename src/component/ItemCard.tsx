@@ -10,8 +10,15 @@ interface Props {
   items: Item[];
   setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setItems: React.Dispatch<React.SetStateAction<Item[]>>;
+  setUpdateItem: React.Dispatch<React.SetStateAction<Item | undefined>>;
 }
-const ItemCard: React.FC<Props> = ({ item, items, setItems, setIsOpen }) => {
+const ItemCard: React.FC<Props> = ({
+  item,
+  items,
+  setItems,
+  setIsOpen,
+  setUpdateItem,
+}) => {
   return (
     <div className="item-card" key={item.id}>
       <span className="name">Name: {item.name}</span>
@@ -22,14 +29,20 @@ const ItemCard: React.FC<Props> = ({ item, items, setItems, setIsOpen }) => {
         <button
           className="update"
           onClick={() =>
-            handleUpdateClick({ item, items, setItems, setIsOpen })
+            handleUpdateClick({
+              item,
+              items,
+              setItems,
+              setIsOpen,
+              setUpdateItem,
+            })
           }
         >
           Update
         </button>
         <button
           className="delete"
-          onClick={() => handleDeleteClick({ item, items, setItems })}
+          onClick={() => handleDeleteClick({ item, setItems })}
         >
           Delete
         </button>
@@ -39,16 +52,13 @@ const ItemCard: React.FC<Props> = ({ item, items, setItems, setIsOpen }) => {
 };
 
 const handleUpdateClick = (props: Props) => {
-  console.log("Update button clicked");
-  const { item, items, setItems, setIsOpen } = props;
-  if (setIsOpen !== undefined) {
-    ItemForm({ item, setIsOpen, setItems });
-    setIsOpen(true);
-  }
+  const { item, items, setItems, setIsOpen, setUpdateItem } = props;
+  console.log("update clicked" + item.name);
+  if (setIsOpen != undefined) setIsOpen(true);
+  setUpdateItem(item);
 };
 
-const handleDeleteClick = async (props: Props) => {
-  const { item, items, setItems } = props;
+const handleDeleteClick = async ({ item, setItems }) => {
   console.log("Delete button clicked" + item.id);
   const deleteItems: Item[] = await ItemService.deleteItem(item);
   setItems(deleteItems);

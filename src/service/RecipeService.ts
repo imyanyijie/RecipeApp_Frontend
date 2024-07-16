@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Recipe, RecipesShort } from '../model/Recipes';
+import { Recipe, RecipeShort } from '../model/Recipes';
 
 const URL = "http://localhost:8080/api/v1/recipes"
 const controller = new AbortController();
@@ -15,10 +15,10 @@ async function getAllRecipes():Promise<Recipe[]>{
     }
 }
 
-async function getAllRecipesShort():Promise<RecipesShort[]>{
+async function getAllRecipesShort():Promise<RecipeShort[]>{
     try{
         const response = await axios.get(URL+`/short`, {signal:controller.signal});
-        console.log('get all item'+response.data);
+        console.log('get all recipes'+response.data);
         return response.data;
     }
     catch(err){

@@ -13,7 +13,7 @@ export interface Recipe {
     updateTimestamp?: Date;
 };
 
-export interface RecipesShort {
+export interface RecipeShort {
     recipeID: number;
     imagePath: string;
     description: string;

@@ -21,4 +21,5 @@
     flex-direction: row;
     justify-content: space-around;
     flex: 1 1;
+    max-height: 5rem;
 }

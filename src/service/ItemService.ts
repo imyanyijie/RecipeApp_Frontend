@@ -1,40 +1,14 @@
 import axios from 'axios';
 import { Item } from '../model/Item';
-const URL = "localhost:8080/api/v1/item"
-let id =4;
+const URL = "http://localhost:8080/api/v1/items"
 const controller = new AbortController();
 
-const testItems: Item[] = [
-    {
-      id: 1,
-      name: "Apple",
-      description: "apple description",
-      unitCost: 2.0,
-    },
-    {
-      id: 2,
-      name: "Cherry",
-      description: "Cpple description",
-      unitCost: 5.0,
-    },
-    {
-      id: 3,
-      name: "tomato",
-      description: "tomato description",
-      unitCost: 1.4,
-    },
-  ];
 
 async function getAllItem():Promise<Item[]>{
     try{
-        // const response = await axios.get(URL,{signal:controller.signal});
-        // console.log('get all item'+response.data);
-        // return response.data;
-
-        //use mock data
-        console.log("get all item from api");
-        const items: Item[] = testItems;
-        return items;
+        const response = await axios.get(URL, {signal:controller.signal});
+        console.log('get all item'+response.data);
+        return response.data;
     }
     catch(err){
         throw(err);
@@ -52,17 +26,14 @@ async function getItem(id){
     
 }
 
-async function createItem(item:Item):Promise<Item[]>{
+async function createItem(item:Item){
+    
     try{
+        console.log("the item trying to create is: "+item.name);
+        
         //running against a testing data set
-        // const{data} = await axios.post(URL, item);
-        // console.log('response '+data); 
-        console.log("create item price"+item.unitCost)
-        item.id = id;
-        console.log("Item Id is "+item.id)
-        testItems.push(item);
-        id++;
-        return testItems;
+        const response = await axios.post(URL, item);
+        return response.data;
     }
     catch(err){
         console.log(err);
@@ -71,15 +42,12 @@ async function createItem(item:Item):Promise<Item[]>{
 }
 
 async function updateItem(item):Promise<Item>{
-    if(!item.id)
+    if(!item.itemID)
         throw new Error("id is missing!");
     try{
-        // const{data} = await axios.post(URL, item);
-        // console.log('response '+data);
-        // let index:number = testItems.indexOf(item);
-        let index = testItems.findIndex(it=>it.id === item.id);
-        testItems[index] = item;
-        return item; 
+        const resposne = await axios.post(URL, item);
+        console.log('response '+resposne.data);
+        return resposne.data; 
     }
     catch(err){
         console.log(err);
@@ -88,19 +56,15 @@ async function updateItem(item):Promise<Item>{
 }
 
 async function deleteItem(item){
-    console.log("Delete Item");
+    console.log("Delete Item: "+item.itemID);
     try{
-        // const response = await axios.delete(URL+`/${item.id}`);
-        // return response.data;
-        var index = testItems.indexOf(item);
-        const deleteItems = testItems.splice(index,1);
-        return deleteItems;
+        const response = await axios.delete(URL+`/${item.itemID}`);
+        return response.data;
     }
     catch(err){
         console.log(err);
         throw(err);
     }
-
 }
 
 function abortRequest(){

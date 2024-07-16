@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet, Link } from "react-router-dom";
 import "./App.css";
 import Item from "./component/Items";
 
@@ -7,7 +8,9 @@ function App() {
     <>
       <header>
         <h2>Smart Recipe App</h2>
-        <div className="search-section">
+        <Link to="/">Items</Link>
+        <Link to="/recipes">Recipes</Link>
+        {/* <div className="search-section">
           <form className="item-form">
             <input
               type="text"
@@ -19,11 +22,12 @@ function App() {
           <button id="search" value="Search" form="location-form">
             Search
           </button>
-        </div>
+        </div> */}
       </header>
-      <main>
+      <Outlet />
+      {/* <main>
         <Item />
-      </main>
+      </main> */}
     </>
   );
 }

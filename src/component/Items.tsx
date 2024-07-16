@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect, useRef } from "react";
 import { abortRequest, getAllItem } from "../service/ItemService";
 import { ItemCard } from "./ItemCard";
 import "../style/Items.css";
@@ -14,17 +14,19 @@ const Items: React.FC = () => {
   const [updateItem, setUpdateItem] = useState<Item>();
 
   useEffect(() => {
+    let isMounted = true;
     async function getItems() {
       console.log("get items");
       const items: Item[] = await getAllItem();
       setItems(items);
     }
     getItems();
+
     return () => {
-      console.log("run clean up");
-      abortRequest();
+      isMounted = false;
+      isMounted && abortRequest();
     };
-  }, [items]);
+  }, []);
   const handleCreateClick = () => {
     setIsOpen(true);
   };
@@ -42,12 +44,17 @@ const Items: React.FC = () => {
             setItems={setItems}
             setIsOpen={setIsOpen}
             setUpdateItem={setUpdateItem}
-            key={item.id}
+            key={item.itemID}
           />
         ))}
       </div>
       {isOpen && (
-        <ItemForm item={updateItem} setIsOpen={setIsOpen} setItems={setItems} />
+        <ItemForm
+          item={updateItem}
+          items={items}
+          setIsOpen={setIsOpen}
+          setItems={setItems}
+        />
       )}
     </>
   );

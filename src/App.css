@@ -1,9 +1,10 @@
 header {
   width: 100%;
   margin: 0rem;
+  padding: 0rem 1rem;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: start;
   gap: 2rem;
   background-color: #213547;
 }
@@ -13,7 +14,14 @@ header h2 {
   color: mintcream;
 }
 
-.search-section {
+header a {
+  font-size: 1rem;
+  color: mintcream;
+  text-align: center;
+  align-self: center;
+}
+
+/* .search-section {
   display: flex;
   gap: 1rem;
   width: 70%;
@@ -39,7 +47,7 @@ form input {
 .search-section #search {
   flex: 1;
   max-width: 10rem;
-}
+} */
 
 main {
   display: flex;

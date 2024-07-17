@@ -16,7 +16,7 @@
     background-color: #b3b3b34f;
 }
 
-.item-card button {
+.recipe-card button {
     display: flex;
     flex-direction: row;
     justify-content: space-around;

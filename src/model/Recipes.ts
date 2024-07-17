@@ -1,6 +1,6 @@
 import { Ingrediant } from "./Ingrediant";
 
-export interface Recipe {
+ interface Recipe {
     recipeID?: number;
     imagePath: string;
     instruction: string;
@@ -13,7 +13,7 @@ export interface Recipe {
     updateTimestamp?: Date;
 };
 
-export interface RecipeShort {
+ interface RecipeShort {
     recipeID: number;
     imagePath: string;
     description: string;
@@ -23,3 +23,5 @@ export interface RecipeShort {
     createTime?: Date;
     updateTimestamp?: Date;
 };
+
+export {Recipe, RecipeShort}

@@ -26,7 +26,7 @@ async function getAllRecipesShort():Promise<RecipeShort[]>{
     }
 }
 
-async function getRecipe(id:number):Promise<Recipe> {
+async function getRecipe(id:string):Promise<Recipe> {
     try{
         const response = await axios.get(URL+`/${id}`, {signal:controller.signal});
         console.log('get all item'+response.data);
@@ -83,4 +83,4 @@ function abortRequest(){
     controller.abort();
 }
 
-export {getAllRecipes, getAllRecipesShort,createRecipe,updateRecipe,deleteRecipe,abortRequest}
+export {getAllRecipes, getAllRecipesShort, getRecipe, createRecipe,updateRecipe,deleteRecipe,abortRequest}

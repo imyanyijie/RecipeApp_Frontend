@@ -11,11 +11,11 @@ const Recipes: React.FC = () => {
   const [createOpen, setCreateOpen] = useState<boolean>(false);
   useEffect(() => {
     let isMounted = true;
-    async function getItems() {
+    async function getRecipesShort() {
       const shortRecipes: RecipeShort[] = await getAllRecipesShort();
       setShortRecipes(shortRecipes);
     }
-    getItems();
+    getRecipesShort();
 
     return () => {
       isMounted = false;

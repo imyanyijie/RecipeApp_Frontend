@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Recipe, RecipeShort } from "../model/Recipes";
 import "../style/RecipeCard.css";
+import { redirect, useNavigate } from "react-router-dom";
 
 interface Props {
   shortRecipes: RecipeShort[];
@@ -16,9 +17,10 @@ export const RecipeCard: React.FC<Props> = ({
   setShortRecipes,
 }) => {
   const [recipe, setRecipe] = useState<Recipe>();
-
+  const navegate = useNavigate();
   const handleOpenRecipe = (e) => {
-    console.log("Opening the specifici recipe");
+    console.log("Opening the specific recipe:" + shortRecipe.recipeID);
+    navegate(`/recipes/${shortRecipe.recipeID}`);
   };
 
   const handleDeleteRecipe = (e) => {

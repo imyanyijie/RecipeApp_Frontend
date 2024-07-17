@@ -6,6 +6,7 @@ import Error from "./component/Error.jsx";
 import "./index.css";
 import Recipes from "./component/Recipes.js";
 import Items from "./component/Items.js";
+import { RecipeDetail } from "./component/RecipeDetail.js";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
       {
         path: "/recipes",
         element: <Recipes />,
+      },
+      {
+        path: "/recipes/:recipeID",
+        element: <RecipeDetail />,
+        errorElement: <Error />,
       },
     ],
   },

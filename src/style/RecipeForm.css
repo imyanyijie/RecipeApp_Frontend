@@ -1,0 +1,20 @@
+.create {
+    margin: 0rem 5rem 0rem 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.create span {
+    color: red;
+    display: none;
+    text-wrap: wrap;
+}
+
+
+input:invalid {
+    border: 1px solid red;
+}
+
+input:invalid~span {
+    display: block;
+}

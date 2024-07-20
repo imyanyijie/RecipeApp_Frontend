@@ -30,8 +30,6 @@ async function createItem(item:Item){
     
     try{
         console.log("the item trying to create is: "+item.name);
-        
-        //running against a testing data set
         const response = await axios.post(URL, item);
         return response.data;
     }

@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Recipe, RecipeShort } from "../model/Recipes";
-import "../style/RecipeCard.css";
-import { redirect, useNavigate } from "react-router-dom";
+import { Recipe, RecipeShort } from "../../model/Recipes";
+import * as RecipeService from "../../service/RecipeService";
+import "../../style/RecipeCard.css";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   shortRecipes: RecipeShort[];
@@ -25,6 +26,7 @@ export const RecipeCard: React.FC<Props> = ({
 
   const handleDeleteRecipe = (e) => {
     console.log("delete the recipe" + e.target.recipeID);
+    if (recipe) RecipeService.deleteRecipe(recipe);
   };
 
   return (
@@ -41,9 +43,6 @@ export const RecipeCard: React.FC<Props> = ({
         Prep Time: {shortRecipe.prepDuration}
       </span>
       <span className="recipeName">Cook Time: {shortRecipe.cookDuration}</span>
-      <button className="delete-recipe" onClick={handleDeleteRecipe}>
-        Delete
-      </button>
     </div>
   );
 };

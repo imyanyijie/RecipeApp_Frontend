@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { abortRequest, getAllItem } from "../service/ItemService";
-import { ItemCard } from "./ItemCard";
-import "../style/Items.css";
+import { abortRequest, getAllItem } from "../../service/ItemService.ts";
+import { ItemCard } from "./ItemCard.tsx";
+import "../../style/Items.css";
 import { FaPlus } from "react-icons/fa6";
-import { Item } from "../model/Item.ts";
+import { Item } from "../../model/Item.ts";
 import { ItemForm } from "./ItemForm.tsx";
 
 const Items: React.FC = () => {

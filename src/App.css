@@ -21,34 +21,6 @@ header a {
   align-self: center;
 }
 
-/* .search-section {
-  display: flex;
-  gap: 1rem;
-  width: 70%;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.search-section form {
-  display: flex;
-  gap: 1rem;
-  flex: 3 0 10rem;
-
-}
-
-form input {
-  height: 2rem;
-  align-self: center;
-  border-radius: 5px;
-  width: 100%;
-  border-style: none;
-}
-
-.search-section #search {
-  flex: 1;
-  max-width: 10rem;
-} */
-
 main {
   display: flex;
   flex-direction: column;

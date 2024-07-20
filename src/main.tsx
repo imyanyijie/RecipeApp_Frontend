@@ -2,11 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
-import Error from "./component/Error.jsx";
+import Error from "./component/util/Error.js";
 import "./index.css";
-import Recipes from "./component/Recipes.js";
-import Items from "./component/Items.js";
-import { RecipeDetail } from "./component/RecipeDetail.js";
+import Recipes from "./component/recipe/Recipes.js";
+import Items from "./component/Item/Items.js";
+import { RecipeDetail } from "./component/recipe/RecipeDetail.js";
+import path from "path";
+import { RecipeForm } from "./component/recipe/RecipeForm.js";
 
 const router = createBrowserRouter([
   {
@@ -23,12 +25,22 @@ const router = createBrowserRouter([
       // },
       {
         path: "/recipes",
-        element: <Recipes />,
-      },
-      {
-        path: "/recipes/:recipeID",
-        element: <RecipeDetail />,
-        errorElement: <Error />,
+        children: [
+          {
+            index: true,
+            element: <Recipes />,
+          },
+          {
+            path: "/recipes/:recipeID",
+            element: <RecipeDetail />,
+            errorElement: <Error />,
+          },
+          {
+            path: "/recipes/create",
+            element: <RecipeForm />,
+            errorElement: <Error />,
+          },
+        ],
       },
     ],
   },

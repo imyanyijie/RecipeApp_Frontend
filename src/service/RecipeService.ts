@@ -40,8 +40,6 @@ async function getRecipe(id:string):Promise<Recipe> {
 async function createRecipe(recipe:Recipe) {
     try{
         console.log("the recipe trying to create is: "+recipe.name);
-        
-        //running against a testing data set
         const response = await axios.post(URL, recipe);
         return response.data;
     }

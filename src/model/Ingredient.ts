@@ -1,6 +1,6 @@
 import { Item } from "./Item";
 
-export interface Ingrediant {
+export interface Ingredient {
     item: Item;
     itemAmount: number;
     unit: string;

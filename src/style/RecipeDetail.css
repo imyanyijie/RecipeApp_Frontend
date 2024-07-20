@@ -1,0 +1,14 @@
+.recipe-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.title-section {
+    text-align: center;
+}
+
+.recipe-detail>button {
+    align-self: center;
+    min-width: 20rem;
+}

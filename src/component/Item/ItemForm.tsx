@@ -1,7 +1,7 @@
 import React from "react";
-import "../style/ItemForm.css";
-import { Item } from "../model/Item";
-import * as ItemService from "../service/ItemService";
+import "../../style/ItemForm.css";
+import { Item } from "../../model/Item";
+import * as ItemService from "../../service/ItemService";
 
 interface Prop {
   item?: Item;
@@ -100,7 +100,7 @@ const ItemForm: React.FC<Prop> = ({ item, items, setIsOpen, setItems }) => {
           pattern="[0-9]*[.,]?[0-9]*"
           defaultValue={item?.unitCost || ""}
         />
-        <span>Price should only be numbers !</span>
+        <span>Price should only be numbers!</span>
       </div>
       <div className="form-button">
         <button type="submit">Save</button>

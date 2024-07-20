@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "../style/ItemCard.css";
-import { Item } from "../model/Item";
-import * as ItemService from "../service/ItemService";
+import "../../style/ItemCard.css";
+import { Item } from "../../model/Item";
+import * as ItemService from "../../service/ItemService";
 import { ItemForm } from "./ItemForm";
 
 interface Props {

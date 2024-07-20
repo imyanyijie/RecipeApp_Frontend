@@ -1,4 +1,4 @@
-import { Ingrediant } from "./Ingrediant";
+import { Ingredient } from "./Ingredient";
 
  interface Recipe {
     recipeID?: number;
@@ -8,7 +8,7 @@ import { Ingrediant } from "./Ingrediant";
     name: string;
     cookDuration: number;
     prepDuration: number;
-    ingrediant: Ingrediant[];
+    ingredient: Ingredient[];
     createTime?: Date;
     updateTimestamp?: Date;
 };
